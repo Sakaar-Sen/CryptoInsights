@@ -43,7 +43,7 @@ DB_FAISS_PATH = 'vectorstore/db_faiss'
 # data = loader.load()
 
 embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2', model_kwargs={'device': 'cpu'})
-db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
+# db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
 
 
 # db = FAISS.from_documents(data, embedding_function)
@@ -60,31 +60,35 @@ class Data(BaseModel):
 
 
 def checkCsvUpdate():
-    try:
-        with open(lastUpdateFileName, "r") as f:
-            lastUpdate = f.read()
-        
-        lastUpdate = datetime.strptime(lastUpdate, "%Y-%m-%d %H:%M:%S.%f")
-        now = datetime.now()
-        diff = now - lastUpdate
-        diff = diff.total_seconds()
+    exists = os.path.isfile(lastUpdateFileName)
+    # print(exists)
 
-        if diff > updateInterval:
+    if exists:
+        try:
+            with open(lastUpdateFileName, "r") as f:
+                lastUpdate = f.read()
+            lastUpdate = datetime.strptime(lastUpdate, "%Y-%m-%d %H:%M:%S.%f")
+            now = datetime.now()
+            diff = now - lastUpdate
+            diff = diff.total_seconds()
+
+            if diff > updateInterval:
+                updateCsv()
+        except FileNotFoundError:
             updateCsv()
-    
-    except:
+    else:
         updateCsv()
+
+    
     
 
 def updateCsv():
-    global db
     getcsv.getcsv()
 
     with open(lastUpdateFileName, "w") as f:
         f.write(str(datetime.now()))
     
     createEmbeddings.createEmbeddings()
-    db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
 
 
 @app.get("/")
@@ -94,6 +98,8 @@ async def root():
 
 @app.post("/api/ask")
 async def ask(data : Data):
+    checkCsvUpdate()
+    db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
     chain = ConversationalRetrievalChain.from_llm(llmmodel, retriever=db.as_retriever(), combine_docs_chain_kwargs={'prompt': prompt})
     question = data.question
     response = chain({"question" : question, "chat_history": []})

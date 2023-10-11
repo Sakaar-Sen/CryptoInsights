@@ -5,6 +5,8 @@ import numpy as np
 import json
 from pprint import pprint
 
+print("getcsv.py")
+
 def getcsv():
     url = "https://data.orionterminal.com/api/screener"
 
@@ -27,7 +29,6 @@ def getcsv():
     df = df.sort_values(by=['marketcap'], ascending=False)
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
-
 
 
     df = df[:100]

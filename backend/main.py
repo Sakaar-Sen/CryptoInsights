@@ -12,11 +12,11 @@ from pydantic import BaseModel
 import getcsv
 import createEmbeddings
 from datetime import datetime
-
+from os import environ
 
 
 app = FastAPI()
-huggingFaceAPiKey = "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"
+huggingFaceAPiKey = environ.get("HUGGINGFACE_API_KEY")
 
 repoID="mistralai/Mistral-7B-Instruct-v0.1"
 

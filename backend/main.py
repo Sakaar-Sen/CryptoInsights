@@ -25,7 +25,7 @@ repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
 llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """ You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. Give generalized and short responses to the question asked. Do not use any dates or mention any apis used. Do not talk about your source of information.
+template = """ You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. Give generalized and short responses to the question asked. Do not use any dates or mention any apis used. Your source of information is the Open Source Cryptocurrency APIs.  
 
 Context:
 ```

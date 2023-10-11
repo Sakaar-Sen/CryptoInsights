@@ -14,6 +14,7 @@ import createEmbeddings
 from datetime import datetime
 from fastapi.responses import FileResponse
 import requests
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,17 +24,17 @@ huggingFaceAPiKey = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 
 repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
-llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.33, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
+llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. ONLY used the context provided to answer the question. Do not mention you have a context in the response.
+template = """You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. Today's Date is {date}.
 
-Context:
+Today's Price data:
 ```
 {context}
 ```
 
 User Query: {question}
-Helpful Answer:"""
+Helpful Answer without talking about knowledge or data cutoff:"""
 
 DB_FAISS_PATH = 'vectorstore/db_faiss'
 
@@ -48,7 +49,7 @@ embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all
 # db.save_local(DB_FAISS_PATH)
 
 
-prompt = PromptTemplate(template=template, input_variables=["context", "question"])
+prompt = PromptTemplate(template=template, input_variables=["context", "question", "date"])
 
 lastUpdateFileName = "lastUpdate.txt"
 updateInterval = 3600
@@ -100,7 +101,7 @@ async def ask(data : Data):
     db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
     chain = ConversationalRetrievalChain.from_llm(llmmodel, retriever=db.as_retriever(), combine_docs_chain_kwargs={'prompt': prompt})
     question = data.question
-    response = chain({"question" : question, "chat_history": []})
+    response = chain({"question" : question, "chat_history": [], "date": datetime.now().strftime("%Y-%m-%d")})
     answer = response["answer"]
     return {"answer": answer}
 

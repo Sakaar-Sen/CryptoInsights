@@ -83,10 +83,10 @@ def checkCsvUpdate():
     
 
 def updateCsv():
-    getcsv.getcsv()
-
     with open(lastUpdateFileName, "w") as f:
         f.write(str(datetime.now()))
+
+    getcsv.getcsv()
     
     createEmbeddings.createEmbeddings()
 

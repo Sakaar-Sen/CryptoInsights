@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
-import sys
+import sys, os
 from pprint import pprint
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
@@ -12,11 +12,14 @@ from pydantic import BaseModel
 import getcsv
 import createEmbeddings
 from datetime import datetime
-from os import environ
+from fastapi.responses import FileResponse
+import requests
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = FastAPI()
-huggingFaceAPiKey = environ.get("HUGGINGFACE_API_KEY")
+huggingFaceAPiKey = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 
 repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
@@ -90,12 +93,45 @@ async def root():
 
 
 @app.post("/api/ask")
-async def root(data : Data):
+async def ask(data : Data):
     chain = ConversationalRetrievalChain.from_llm(llmmodel, retriever=db.as_retriever(), combine_docs_chain_kwargs={'prompt': prompt})
     question = data.question
     response = chain({"question" : question, "chat_history": []})
     answer = response["answer"]
     return {"answer": answer}
+
+
+@app.get("/api/news")
+async def news(limit : int = 100):
+    url = "https://news.treeofalpha.com/api/news?limit=300"
+    response = requests.get(url)
+    response = response.json()
+    result = []
+    for i in response:
+        try:
+
+            coin = i["suggestions"][0]["coin"]
+            foldername = "logos/"
+            coin = coin.lower()
+
+            imgPath = os.path.join(foldername, coin+".png")
+            
+            if i["source"] != "Twitter" and len(result) < limit and os.path.exists(imgPath):
+                    result.append({"title": i["title"],"source": i["source"], "url": i["url"], "coin": coin })
+        except:
+            pass
+    return result
+
+@app.get("/api/image")
+async def image(coin : str):
+    foldername = "logos/"
+    coin = coin.lower()
+
+    imgPath = os.path.join(foldername, coin+".png")
+    if os.path.exists(imgPath):
+        return FileResponse(imgPath)
+    else:
+        return {"image": "Not Found"}
 
 
 if __name__ == "__main__":

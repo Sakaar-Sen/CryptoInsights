@@ -23,19 +23,17 @@ huggingFaceAPiKey = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 
 repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
-llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
+llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.33, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """ You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. Give generalized and short responses to the question asked. Do not use any dates or mention any apis used. Your source of information is the Open Source Cryptocurrency APIs. Your knowledge base is updated every 24 hrs.
+template = """You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. ONLY used the context provided to answer the question. Do not mention you have a context in the response.
 
 Context:
 ```
 {context}
 ```
 
-Question: {question}
-Helpful Answer:
-
-"""
+User Query: {question}
+Helpful Answer:"""
 
 DB_FAISS_PATH = 'vectorstore/db_faiss'
 

@@ -4,6 +4,8 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
 import sys, os
+import pandas as pd
+import numpy as np
 from pprint import pprint
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
@@ -15,6 +17,7 @@ from datetime import datetime
 from fastapi.responses import FileResponse
 import requests
 from datetime import datetime
+from tvDatafeed import TvDatafeed, Interval
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,7 +29,7 @@ repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
 llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """You are a cryptocurrency expert chatbot called Ada. You help people gain insights from the universe of cryptocurrencies. Today's Date is {date}.
+template = """You are a cryptocurrency expert chatbot called Eva. You help people gain insights from the universe of cryptocurrencies. Today's Date is {date}. 
 
 Today's Price data:
 ```
@@ -52,7 +55,7 @@ embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all
 prompt = PromptTemplate(template=template, input_variables=["context", "question", "date"])
 
 lastUpdateFileName = "lastUpdate.txt"
-updateInterval = 3600
+updateInterval = 14400
 
 class Data(BaseModel):
     question: str
@@ -102,7 +105,7 @@ async def ask(data : Data):
     chain = ConversationalRetrievalChain.from_llm(llmmodel, retriever=db.as_retriever(), combine_docs_chain_kwargs={'prompt': prompt})
     question = data.question
     response = chain({"question" : question, "chat_history": [], "date": datetime.now().strftime("%Y-%m-%d")})
-    answer = response["answer"]
+    answer = response["answer"].strip()
     return {"answer": answer}
 
 
@@ -127,6 +130,7 @@ async def news(limit : int = 100):
             pass
     return result
 
+
 @app.get("/api/image")
 async def image(coin : str):
     foldername = "logos/"
@@ -139,6 +143,42 @@ async def image(coin : str):
         return {"image": "Not Found"}
 
 
+@app.get("/api/chartdata")
+async def chartData(coin: str, limit : int = 100):
+    tv = TvDatafeed()
+    data = tv.get_hist(symbol=f'{coin}USDT',exchange='BINANCE',interval=Interval.in_4_hour,n_bars=limit)
+    return "test"
+
+
+
+@app.get("/api/analytics")
+async def getanalytics(limit : int = 100):
+    url = "https://data.orionterminal.com/api/screener"
+    infourl = "https://data.orionterminal.com/api/info"
+
+    res = requests.get(url)
+    res = res.json()
+
+    res2 = requests.get(infourl)
+    res2 = res2.json()
+    info = res2['ALIAS_SCREENER']
+    print(info)
+
+    df = pd.DataFrame(res)
+    df = df.transpose()
+    df = df.reset_index()
+    df = df.rename(columns=info)
+    df = df.sort_values(by=['marketcap'], ascending=False)
+    df = df[~df['index'].str.contains("BUSD")]
+    df['index'] = df['index'].str.replace("-binanceusdm", "")
+
+    df = df.drop(columns=["ticks_5m","ticks_15m","ticks_1h","change_5m","change_15m","change_8h", "volume_5m","volume_15m","volume_1h","volume_8h","vdelta_5m","vdelta_15m","vdelta_1h","vdelta_8h", "OI_change_15m","OI_change_1h","OI_change_8h", "volatility_5m","volatility_15m", "openinterest"])
+    
+    df = df[:limit]
+    df = df.to_dict(orient='records')
+    return "hello"
+
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-    

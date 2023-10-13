@@ -1,15 +1,24 @@
 
 .container{
-    background-image: url("../../../public/bg.png");
+    background-image: url("../../../public/q0.jpg");
     min-height:100vh;
+    overflow-y: hidden;
     min-width:100%;
-    display:flex;
-    object-fit:fill;
-    position:relative;
+    display: flex;
+    object-fit: fill;
+    position: relative;
     align-items: center;
     display: flex;
     align-items: center;
     justify-content: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    .container{
+        background-image: url("../../../public/mobilebg.png");
+
+    }
 }

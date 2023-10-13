@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 function Chatbot() {
@@ -10,7 +11,10 @@ function Chatbot() {
 
     const getBotResponse = async () => {
         if (!userInput) return;
+        setUserMessage(userInput);
+        setUserInput(""); 
         setBotResponse("Thinking...");
+    
         const response = await fetch("/api/ask", {
             method: "POST",
             body: JSON.stringify({ question: userInput }),
@@ -18,11 +22,12 @@ function Chatbot() {
                 "Content-Type": "application/json",
             },
         });
-        setUserMessage(userInput);
-        setUserInput("");
+    
         const data = await response.json();
         setBotResponse(data.answer);
+    
     };
+
 
 
 
@@ -50,7 +55,7 @@ function Chatbot() {
                     </button>
                 </div>
                 {showChatbot && (
-                    <div className={`bg-gray-800 rounded-lg shadow-lg w-96`}>
+                    <div className="bg-gray-800 rounded-lg shadow-lg w-96 pb-4">
                         <div className="flex flex-col h-full">
                             <div className="flex flex-col flex-grow">
                                 <div className="flex flex-col flex-grow px-4 py-6 overflow-y-auto">
@@ -88,22 +93,9 @@ function Chatbot() {
                                     />
                                     <button
                                         onClick={getBotResponse}
-                                        className="flex items-center justify-center bg-gray-700 rounded-full w-12 h-12 ml-4"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6 text-white"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 5l7 7-7 7"
-                                            />
-                                        </svg>
+                                        className="flex items-center justify-center bg-gray-700 rounded-md w-12 h-10 ml-4"
+                                    >   
+                                        <p>🚀</p>
                                     </button>
                                 </div>
                             </div>

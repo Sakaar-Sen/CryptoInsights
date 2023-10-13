@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
-const Navbar = () => {
+const Navbar = ({pos}) => {
 
     const [nav, setNav] = useState(false);
     const [color, setColor] = useState('transparent');
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <div
-      className='left-0 top-0 w-full z-10 ease-in duration-30 bg-transparent fixed'>
+      className= {'left-0 top-0 w-full z-10 ease-in duration-30 bg-transparent' + " " + pos}>
       <div className='max-w-[1240px] m-auto flex justify-between items-center py-2 px-4  text-white'>
         <Link href='/'>
           <h1 style={{ color: `${textColor}`}} className='font-bold text-2xl '>

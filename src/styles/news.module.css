@@ -1,0 +1,9 @@
+
+.container{
+    background-image: url("../../public/rp.jpg");
+    background-repeat: repeat;
+    background-size: 800px;
+    min-height:100vh;
+
+}
+

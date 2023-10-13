@@ -5,6 +5,7 @@ import NewsElement from './components/NewsElement'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import styles from './../styles/news.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,8 +28,9 @@ export default function News() {
 
 
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
+
       <h1 className='text-white text-4xl text-center my-12'> NEWS </h1>
       <div className='flex align-middle justify-center'>
         {loading ? <h1 className='text-6xl text-white'>Loading...</h1> :

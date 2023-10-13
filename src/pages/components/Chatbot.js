@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 
-
 function Chatbot() {
     const [userInput, setUserInput] = useState("");
     const [userMessage, setUserMessage] = useState("");

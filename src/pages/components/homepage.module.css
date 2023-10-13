@@ -1,0 +1,15 @@
+
+.container{
+    background-image: url("../../../public/bg.png");
+    min-height:100vh;
+    min-width:100%;
+    display:flex;
+    object-fit:fill;
+    position:relative;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
-const Navbar = () => {
+const Navbar = ({pos}) => {
 
     const [nav, setNav] = useState(false);
     const [color, setColor] = useState('transparent');
@@ -31,29 +31,27 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ backgroundColor: `${color}`, borderBottom: `1px solid ${textColor}` }}
-      className='left-0 top-0 w-full z-10 ease-in duration-30'
-    >
-      <div className='max-w-[1240px] m-auto flex justify-between items-center p-4 text-white'>
+      className= {'left-0 top-0 w-full z-10 ease-in duration-30 bg-transparent' + " " + pos}>
+      <div className='max-w-[1240px] m-auto flex justify-between items-center py-2 px-4  text-white'>
         <Link href='/'>
-          <h1 style={{ color: `${textColor}` }} className='font-bold text-4xl'>
+          <h1 style={{ color: `${textColor}`}} className='font-bold text-2xl '>
             Crypto Insights
           </h1>
         </Link>
         <ul style={{ color: `${textColor}` }} className='hidden sm:flex align-middle'>
-          <li className='p-4 '>
+          <li className='py-2 px-4'>
             <Link href='/' className='hover:text-gray-300 duration-150'>Home</Link>
           </li>
-          <li className='p-4'>
-            <Link href='/info' className='hover:text-gray-300 duration-150'>Info</Link>
+          <li className='py-2 px-4'>
+            <Link href='/explore' className='hover:text-gray-300 duration-150'>Explore</Link>
           </li>
-          <li className='p-4'>
+          <li className='py-2 px-4 '>
             <Link href='/analytics' className='hover:text-gray-300 duration-150'>Analytics</Link>
           </li>
-          <li className='p-4'>
+          <li className='py-2 px-4 '>
             <Link href='/learn' className='hover:text-gray-300 duration-150'>Learn</Link>
           </li>
-          <li className='p-4'>
+          <li className='py-2 px-4 '>
             <Link href='/news' className='hover:text-gray-300 duration-150'>News</Link>
           </li>
         </ul>
@@ -80,7 +78,7 @@ const Navbar = () => {
               <Link href='/'>Home</Link>
             </li>
             <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
-              <Link href='/info'>Info</Link>
+              <Link href='/explore'>Explore</Link>
             </li>
             <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
               <Link href='/analytics'>Analytics</Link>

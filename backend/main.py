@@ -12,8 +12,6 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain.llms import HuggingFaceHub
 from pydantic import BaseModel
-import getcsv
-import createEmbeddings
 from datetime import datetime
 from fastapi.responses import FileResponse
 import requests
@@ -48,9 +46,8 @@ repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
 llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """You are a cryptocurrency expert chatbot called Eva available to chat on a website called 'Crypto Insights'. 
-Website Link: cryptoinsights-six.vercel.app 
-You help people gain insights from the universe of cryptocurrencies. If someone asks for price data, tell them you dont have the latest info and to view the website for up-to-date data. 
+template = """You are a cryptocurrency expert chatbot called Eva available to chat on a website called "Crypto Insights". 
+You help people gain insights from the universe of cryptocurrencies. If someone asks for real time financial data (price, volatility, market cap, etc) of any asset, tell them to view https://cryptoinsights-six.vercel.app/ for up-to-date crypto data. 
 
 
 User Query: {question}
@@ -75,6 +72,7 @@ async def ask(data : Data):
     question = data.question
     response = chain.run(question=question)
     answer = response.strip()
+
     return {"answer": answer}
 
 

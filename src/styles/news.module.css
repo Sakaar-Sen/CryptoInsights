@@ -1,9 +1,13 @@
 
-.container{
+/* .container{
     background-image: url("../../public/rp.jpg");
     background-repeat: repeat;
-    background-size: 800px;
+    background-size: 200px;
     min-height:100vh;
 
 }
+ */
 
+ .container{
+    background-image: linear-gradient(to left bottom, #00b5f2, #009bdc, #0081c6, #0067ae, #004f95, #064182, #073370, #06265e, #041f4f, #021841, #021033, #000426);
+ }

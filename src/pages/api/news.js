@@ -2,6 +2,8 @@
 // api/proxy.js
 import axios from 'axios';
 
+
+// reverse proxy since server is not https
 export default async (req, res) => {
   try {
     const response = await axios.get('http://sakaarsen.lag.tf/api/news');

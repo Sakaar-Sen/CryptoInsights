@@ -14,7 +14,7 @@ export default function News() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = "http://localhost:8000/api/news";
+    const url = "http://sakaarsen.lag.tf/api/news";
     const getNews = async () => {
       const response = await axios.get(url);
       const data = response.data;
@@ -31,7 +31,7 @@ export default function News() {
       <Navbar />
       <h1 className='text-white text-4xl text-center my-12'> NEWS </h1>
       <div className='flex align-middle justify-center'>
-        {loading ? <h1>Loading...</h1> :
+        {loading ? <h1 className='text-6xl text-white'>Loading...</h1> :
 
           <div className="grid grid-cols-1 mt-30 gap-4">
             {news.map((news) => (

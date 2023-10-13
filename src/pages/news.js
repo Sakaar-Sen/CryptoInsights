@@ -14,7 +14,7 @@ export default function News() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = "http://sakaarsen.lag.tf/api/news";
+    const url = "/api/news";
     const getNews = async () => {
       const response = await axios.get(url);
       const data = response.data;

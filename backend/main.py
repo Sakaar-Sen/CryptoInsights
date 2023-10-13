@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
+from langchain.chains.llm import LLMChain
 import sys, os
 import pandas as pd
 import numpy as np
@@ -47,67 +48,20 @@ repoID="mistralai/Mistral-7B-Instruct-v0.1"
 
 llmmodel = HuggingFaceHub(repo_id=repoID, model_kwargs={"max_new_tokens": 250, "temperature": 0.1, "repetition_penalty": 1.33},huggingfacehub_api_token=huggingFaceAPiKey)
 
-template = """You are a cryptocurrency expert chatbot called Eva. You help people gain insights from the universe of cryptocurrencies. Today's Date is {date}. 
+template = """You are a cryptocurrency expert chatbot called Eva available to chat on a website called 'Crypto Insights'. 
+Website Link: cryptoinsights-six.vercel.app 
+You help people gain insights from the universe of cryptocurrencies. If someone asks for price data, tell them you dont have the latest info and to view the website for up-to-date data. 
 
-Today's Price data:
-```
-{context}
-```
 
 User Query: {question}
 Helpful Answer without talking about knowledge or data cutoff:"""
 
-DB_FAISS_PATH = 'vectorstore/db_faiss'
+prompt = PromptTemplate(template=template, input_variables=["question"])
 
-# loader = CSVLoader(file_path='orionterminal.csv', encoding="utf-8", csv_args={'delimiter': ','})
-# data = loader.load()
-
-embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2', model_kwargs={'device': 'cpu'})
-# db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
-
-
-# db = FAISS.from_documents(data, embedding_function)
-# db.save_local(DB_FAISS_PATH)
-
-
-prompt = PromptTemplate(template=template, input_variables=["context", "question", "date"])
-
-lastUpdateFileName = "lastUpdate.txt"
-updateInterval = 24 * 60 * 60 #update every 24 hrs
 
 class Data(BaseModel):
     question: str
 
-
-def checkCsvUpdate():
-    exists = os.path.isfile(lastUpdateFileName)
-    # print(exists)
-
-    if exists:
-        try:
-            with open(lastUpdateFileName, "r") as f:
-                lastUpdate = f.read()
-            lastUpdate = datetime.strptime(lastUpdate, "%Y-%m-%d %H:%M:%S.%f")
-            now = datetime.now()
-            diff = now - lastUpdate
-            diff = diff.total_seconds()
-
-            if diff > updateInterval:
-                updateCsv()
-        except FileNotFoundError:
-            updateCsv()
-    else:
-        updateCsv()
-
-    
-    
-
-def updateCsv():
-    with open(lastUpdateFileName, "w") as f:
-        f.write(str(datetime.now()))
-
-    getcsv.getcsv()
-    createEmbeddings.createEmbeddings()
 
 
 @app.get("/")
@@ -117,12 +71,10 @@ async def root():
 
 @app.post("/api/ask")
 async def ask(data : Data):
-    checkCsvUpdate()
-    db = FAISS.load_local(DB_FAISS_PATH, embedding_function)
-    chain = ConversationalRetrievalChain.from_llm(llmmodel, retriever=db.as_retriever(), combine_docs_chain_kwargs={'prompt': prompt})
+    chain = LLMChain(prompt=prompt, llm=llmmodel)
     question = data.question
-    response = chain({"question" : question, "chat_history": [], "date": datetime.now().strftime("%Y-%m-%d")})
-    answer = response["answer"].strip()
+    response = chain.run(question=question)
+    answer = response.strip()
     return {"answer": answer}
 
 

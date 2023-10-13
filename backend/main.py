@@ -27,7 +27,8 @@ load_dotenv()
 #enable for all cors
 
 origins = [ 
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "cryptoinsights-six.vercel.app"
 ]
 
 app = FastAPI()

@@ -19,10 +19,27 @@ import requests
 from datetime import datetime
 from tvDatafeed import TvDatafeed, Interval
 from dotenv import load_dotenv
+#cors
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
+#enable for all cors
+
+origins = [ 
+    "http://localhost:3000"
+]
+
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+
+)
+
 huggingFaceAPiKey = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 
 repoID="mistralai/Mistral-7B-Instruct-v0.1"
@@ -89,7 +106,6 @@ def updateCsv():
         f.write(str(datetime.now()))
 
     getcsv.getcsv()
-    
     createEmbeddings.createEmbeddings()
 
 
@@ -111,7 +127,7 @@ async def ask(data : Data):
 
 @app.get("/api/news")
 async def news(limit : int = 100):
-    url = "https://news.treeofalpha.com/api/news?limit=300"
+    url = "https://news.treeofalpha.com/api/news?limit=500"
     response = requests.get(url)
     response = response.json()
     result = []
@@ -124,9 +140,15 @@ async def news(limit : int = 100):
 
             imgPath = os.path.join(foldername, coin+".png")
             
-            if i["source"] != "Twitter" and len(result) < limit and os.path.exists(imgPath):
-                    result.append({"title": i["title"],"source": i["source"], "url": i["url"], "coin": coin })
+            time = i["time"]
+            time = datetime.fromtimestamp(time/1000.0)
+            time = time.strftime("%d/%m/%Y %H:%M")
+            time = str(time)
+                
+            if i["source"] != "Twitter" and len(result) < limit and os.path.exists(imgPath) and len(i["title"]) < 100:
+                    result.append({"title": i["title"],"source": i["source"], "url": i["url"], "coin": coin, "time": time })
         except:
+            print("error")
             pass
     return result
 

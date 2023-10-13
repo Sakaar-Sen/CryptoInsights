@@ -14,25 +14,25 @@ const Navbar = () => {
       setNav(!nav);
     };
   
-    useEffect(() => {
-      const changeColor = () => {
-        if (window.scrollY >= 90) {
-          setColor('#000000');
-          setTextColor('#ffffff');
-        } else {
-          setColor('#000000');
-          setTextColor('#ffffff');
-        }
-        console.log(window.scrollY);
-      };
-      window.addEventListener('scroll', changeColor);
-    }, []);
+    // useEffect(() => {
+    //   const changeColor = () => {
+    //     if (window.scrollY >= 190) {
+    //       setColor('#000000');
+    //       setTextColor('#ffffff');
+    //     } else {
+    //       setColor('#000000');
+    //       setTextColor('#ffffff');
+    //     }
+    //     console.log(window.scrollY);
+    //   };
+    //   window.addEventListener('scroll', changeColor);
+    // }, []);
 
 
   return (
     <div
       style={{ backgroundColor: `${color}`, borderBottom: `1px solid ${textColor}` }}
-      className='fixed left-0 top-0 w-full z-10 ease-in duration-30'
+      className='left-0 top-0 w-full z-10 ease-in duration-30'
     >
       <div className='max-w-[1240px] m-auto flex justify-between items-center p-4 text-white'>
         <Link href='/'>
@@ -52,6 +52,9 @@ const Navbar = () => {
           </li>
           <li className='p-4'>
             <Link href='/learn' className='hover:text-gray-300 duration-150'>Learn</Link>
+          </li>
+          <li className='p-4'>
+            <Link href='/news' className='hover:text-gray-300 duration-150'>News</Link>
           </li>
         </ul>
 
@@ -84,6 +87,9 @@ const Navbar = () => {
             </li>
             <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
               <Link href='/learn'>Learn</Link>
+            </li>
+            <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
+              <Link href='/learn'>News</Link>
             </li>
           
           </ul>

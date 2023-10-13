@@ -55,7 +55,7 @@ embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all
 prompt = PromptTemplate(template=template, input_variables=["context", "question", "date"])
 
 lastUpdateFileName = "lastUpdate.txt"
-updateInterval = 14400
+updateInterval = 24 * 60 * 60 #update every 24 hrs
 
 class Data(BaseModel):
     question: str

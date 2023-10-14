@@ -21,9 +21,9 @@ export default function News() {
       const data = response.data;
       console.log(response.data);
       setNews(data);
-      setLoading(false);
     };
     getNews();
+    setLoading(false);
   }, []);
 
   const totalPages = Math.ceil(news.length / itemsPerPage);
@@ -48,7 +48,11 @@ export default function News() {
         <p className="text-gray-300 text-xl mb-8">The latest news from the crypto world</p>
       </div>
 
-      
+      {news.length == 0 ? (
+        <div className="flex justify-center items-center mt-20">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
+        </div>
+      ) : null}
 
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 mt-30 gap-4">
@@ -73,9 +77,9 @@ export default function News() {
         :
         <div className="flex justify-center items-center mt-6 pb-20">
           <div className='flex gap-24 justify-center items-center'>
-            <button className="text-gray-100 text-[1.3rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage - 1)}>Previous </button>
-            <span className='text-white text-[1.3rem]'> {currentPage} of {totalPages} </span>
-            <button className="text-gray-100 text-[1.3rem] border-gray-300 border-solid border-2 px-4 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage + 1)}> Next</button>
+            <button className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage - 1)}>Previous </button>
+            <span className='text-white text-[1.2rem]'> {currentPage} of {totalPages} </span>
+            <button className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-4 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage + 1)}> Next</button>
           </div>
         </div>}
 

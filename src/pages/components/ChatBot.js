@@ -12,9 +12,9 @@ function Chatbot() {
     const getBotResponse = async () => {
         if (!userInput) return;
         setUserMessage(userInput);
-        setUserInput(""); 
+        setUserInput("");
         setBotResponse("Thinking...");
-    
+
         const response = await fetch("/api/ask", {
             method: "POST",
             body: JSON.stringify({ question: userInput }),
@@ -22,10 +22,10 @@ function Chatbot() {
                 "Content-Type": "application/json",
             },
         });
-    
+
         const data = await response.json();
         setBotResponse(data.answer);
-    
+
     };
 
 
@@ -47,15 +47,25 @@ function Chatbot() {
         <div className="fixed md:bottom-10 md:right-10 bottom-5 right-5 z-50">
             <div className="flex flex-col">
                 <div className="flex justify-end">
-                    <button
-                        onClick={toggleButton}
-                        className="bg-gray-600 text-white rounded-full w-12 h-12 flex items-center justify-center m-4"
-                    >
-                        <p>🤖</p>
-                    </button>
+                    {showChatbot === false ?
+                        <button
+                            onClick={toggleButton}
+                            className="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center m-4 border-solid border-slate-500 border-2 hover:bg-gray-600 duration-200 transition-all"
+                        >
+                            <p>🤖</p>
+                        </button>
+                        :
+                        <button
+                            onClick={toggleButton}
+                            className="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center m-4 border-solid border-slate-500 border-2 hover:bg-gray-600 duration-200 transition-all"
+                        >
+                            <p>❌</p>
+                        </button>
+                    }
+
                 </div>
                 {showChatbot && (
-                    <div className="bg-gray-800 rounded-lg shadow-lg w-96 pb-4">
+                    <div className="bg-gray-900 rounded-lg shadow-lg w-96 pb-4 border-solid border-2 border-slate-500">
                         <div className="flex flex-col h-full">
                             <div className="flex flex-col flex-grow">
                                 <div className="flex flex-col flex-grow px-4 py-6 overflow-y-auto">
@@ -93,8 +103,8 @@ function Chatbot() {
                                     />
                                     <button
                                         onClick={getBotResponse}
-                                        className="flex items-center justify-center bg-gray-700 rounded-md w-12 h-10 ml-4"
-                                    >   
+                                        className="flex items-center justify-center bg-gray-700 rounded-2xl w-12 h-10 ml-4"
+                                    >
                                         <p>🚀</p>
                                     </button>
                                 </div>

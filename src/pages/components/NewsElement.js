@@ -8,7 +8,7 @@ function NewsElement(props) {
 
     return (
         <a href={props.url} target="_blank" className="md:w-[48rem] hover:scale-105 transition duration-100 relative">
-            <div className="text-white flex items-center justify-start bg-slate-800 border-gray-500 border-solid border-2 rounded-lg gap-8">
+            <div className="text-white flex items-center justify-start bg-slate-800 border-slate-400 border-solid border-2 rounded-lg gap-8">
                 <div>
                     <Image alt={props.coin} src={"http://sakaarsen.lag.tf/api/image?coin=" + props.coin} width={100} height={100} 
                     className=" px-2 md:px-6 py-2 md:py-6 opacity-90" />

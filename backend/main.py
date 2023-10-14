@@ -188,7 +188,7 @@ async def getanalyticsdata(limit : int = 100):
     df = df[:limit]
 
 
-    df = df.rename(columns={"volatility_15m": "Volatility 15m", "volatility_1h": "Volatility 1h", "BTC_correlation_3d": "BTC correlation 3d", "ETH_correlation_3d": "ETH correlation 3d", "BTC_beta_3d": "BTC beta 3d", "ETH_beta_3d": "ETH beta 3d"})
+    df = df.rename(columns={"volatility_15m": "Volatility 15m", "volatility_1h": "Volatility 1h", "BTC_correlation_3d": "BTC correlation 3d", "ETH_correlation_3d": "ETH correlation 3d", "BTC_beta_3d": "BTC beta 3d", "ETH_beta_3d": "ETH beta 3d", "index": "Asset", "price": "Price"})
 
 
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]

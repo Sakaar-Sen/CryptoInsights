@@ -132,23 +132,33 @@ async def getexploredata(limit : int = 100):
     res2 = requests.get(infourl)
     res2 = res2.json()
     info = res2['ALIAS_SCREENER']
-    print(info)
 
     df = pd.DataFrame(res)
     df = df.transpose()
     df = df.reset_index()
     df = df.rename(columns=info)
     df = df.sort_values(by=['marketcap'], ascending=False)
+   
+    df['marketcap'] = df['marketcap'] / 1000000000
+    df['marketcap'] = df['marketcap'].astype(float).round(2)
+    df['marketcap'] = df['marketcap'].astype(str) + "B"
+
+    df['volume_1d'] = df['volume_1d'] / 1000000
+    df['volume_1d'] = df['volume_1d'].astype(float).round(2)
+    df['volume_1d'] = df['volume_1d'].astype(str) + "M"
+
+    df['price'] = "$" + df['price'].astype(str)
+
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
-
     columnsToKeep = ["index", "price", "change_1h", "change_1d", "volume_1d", "marketcap"]
+
     df = df[columnsToKeep]
-    
+
     df = df[:limit]
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
-    return {"data": df}
+    return df
 
 
 
@@ -163,7 +173,6 @@ async def getanalyticsdata(limit : int = 100):
     res2 = requests.get(infourl)
     res2 = res2.json()
     info = res2['ALIAS_SCREENER']
-    print(info)
 
     df = pd.DataFrame(res)
     df = df.transpose()
@@ -175,13 +184,11 @@ async def getanalyticsdata(limit : int = 100):
 
     columnsToKeep = ["index", "price", "OI/MC", "volatility_15m", "volatility_1h", "BTC_correlation_3d", "ETH_correlation_3d", "BTC_beta_3d", "ETH_beta_3d"]
     df = df[columnsToKeep]
-    # df["id"] = df["index"]
 
 
     df = df[:limit]
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
-    print(type(df))
     return df
 
 

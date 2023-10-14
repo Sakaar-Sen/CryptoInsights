@@ -18,12 +18,9 @@ import requests
 from datetime import datetime
 from tvDatafeed import TvDatafeed, Interval
 from dotenv import load_dotenv
-#cors
 from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
-
-#enable for all cors
 
 origins = [ 
     "http://localhost:3000",
@@ -120,12 +117,12 @@ async def image(coin : str):
 async def chartData(coin: str, limit : int = 100):
     tv = TvDatafeed()
     data = tv.get_hist(symbol=f'{coin}USDT',exchange='BINANCE',interval=Interval.in_4_hour,n_bars=limit)
-    return "test"
+    return data
 
 
 
-@app.get("/api/analytics")
-async def getanalytics(limit : int = 100):
+@app.get("/api/explore")
+async def getexploredata(limit : int = 100):
     url = "https://data.orionterminal.com/api/screener"
     infourl = "https://data.orionterminal.com/api/info"
 
@@ -145,11 +142,44 @@ async def getanalytics(limit : int = 100):
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
 
-    df = df.drop(columns=["ticks_5m","ticks_15m","ticks_1h","change_5m","change_15m","change_8h", "volume_5m","volume_15m","volume_1h","volume_8h","vdelta_5m","vdelta_15m","vdelta_1h","vdelta_8h", "OI_change_15m","OI_change_1h","OI_change_8h", "volatility_5m","volatility_15m", "openinterest"])
+    columnsToKeep = ["index", "price", "change_1h", "change_1d", "volume_1d", "marketcap"]
+    df = df[columnsToKeep]
     
     df = df[:limit]
+    df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
-    return "hello"
+    return {"data": df}
+
+
+
+@app.get("/api/analytics")
+async def getanalyticsdata(limit : int = 100):
+    url = "https://data.orionterminal.com/api/screener"
+    infourl = "https://data.orionterminal.com/api/info"
+
+    res = requests.get(url)
+    res = res.json()
+
+    res2 = requests.get(infourl)
+    res2 = res2.json()
+    info = res2['ALIAS_SCREENER']
+    print(info)
+
+    df = pd.DataFrame(res)
+    df = df.transpose()
+    df = df.reset_index()
+    df = df.rename(columns=info)
+    df = df.sort_values(by=['marketcap'], ascending=False)
+    df = df[~df['index'].str.contains("BUSD")]
+    df['index'] = df['index'].str.replace("-binanceusdm", "")
+
+    columnsToKeep = ["index", "price", "marketcap", "OI/MC", "volatility_15m", "volatility_1h", "BTC_correlation_3d", "ETH_correlation_3d", "BTC_beta_3d", "ETH_beta_3d"]
+    df = df[columnsToKeep]
+    
+    df = df[:limit]
+    df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
+    df = df.to_dict(orient='records')
+    return {"data": df}
 
 
 

@@ -31,7 +31,7 @@ const Navbar = ({pos}) => {
 
   return (
     <div
-      className= {'left-0 top-0 w-full z-10 ease-in duration-30 bg-gray-900 bg-opacity-70 backdrop-blur-md' + " " + pos}>
+      className= {'left-0 top-0 w-full z-10 ease-in duration-30 bg-gray-900 bg-opacity-50 backdrop-blur-sm' + " " + pos}>
       <div className='max-w-[1240px] m-auto flex justify-between items-center py-2 px-4  text-white'>
         <Link href='/'>
           <h1 style={{ color: `${textColor}`}} className='font-bold text-2xl '>

@@ -138,6 +138,8 @@ async def getexploredata(limit : int = 100):
     df = df.reset_index()
     df = df.rename(columns=info)
     df = df.sort_values(by=['marketcap'], ascending=False)
+    df = df[:limit]
+
    
     df['marketcap'] = df['marketcap'] / 1000000000
     df['marketcap'] = df['marketcap'].astype(float).round(2)
@@ -152,10 +154,8 @@ async def getexploredata(limit : int = 100):
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
     columnsToKeep = ["index", "price", "change_1h", "change_1d", "volume_1d", "marketcap"]
-
     df = df[columnsToKeep]
-
-    df = df[:limit]
+    df = df.rename(columns={"change_1h": "Change 1h", "change_1d": "Change 1d", "volume_1d": "Volume 1d", "marketcap": "Market Cap"})
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
     return df
@@ -179,14 +179,18 @@ async def getanalyticsdata(limit : int = 100):
     df = df.reset_index()
     df = df.rename(columns=info)
     df = df.sort_values(by=['marketcap'], ascending=False)
+
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
 
     columnsToKeep = ["index", "price", "OI/MC", "volatility_15m", "volatility_1h", "BTC_correlation_3d", "ETH_correlation_3d", "BTC_beta_3d", "ETH_beta_3d"]
     df = df[columnsToKeep]
-
-
     df = df[:limit]
+
+
+    df = df.rename(columns={"volatility_15m": "Volatility 15m", "volatility_1h": "Volatility 1h", "BTC_correlation_3d": "BTC correlation 3d", "ETH_correlation_3d": "ETH correlation 3d", "BTC_beta_3d": "BTC beta 3d", "ETH_beta_3d": "ETH beta 3d"})
+
+
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
     return df

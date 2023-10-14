@@ -49,7 +49,7 @@ function Chatbot() {
                 <div className="flex justify-end">
                     <button
                         onClick={toggleButton}
-                        className="bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center m-4"
+                        className="bg-gray-600 text-white rounded-full w-12 h-12 flex items-center justify-center m-4"
                     >
                         <p>🤖</p>
                     </button>

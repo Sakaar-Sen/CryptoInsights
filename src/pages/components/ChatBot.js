@@ -49,32 +49,32 @@ function Chatbot() {
                 <div className="flex justify-end">
                     <button
                         onClick={toggleButton}
-                        className="bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center m-4"
+                        className="bg-gray-600 text-white rounded-full w-12 h-12 flex items-center justify-center m-4"
                     >
                         <p>🤖</p>
                     </button>
                 </div>
                 {showChatbot && (
-                    <div className="bg-gray-800 rounded-lg shadow-lg w-96 pb-4">
+                    <div className="bg-gray-400 rounded-lg shadow-lg w-96 pb-4">
                         <div className="flex flex-col h-full">
                             <div className="flex flex-col flex-grow">
                                 <div className="flex flex-col flex-grow px-4 py-6 overflow-y-auto">
                                     {userMessage && (
                                         <div className="flex flex-col mb-4">
-                                            <span className="text-gray-400 text-sm">
+                                            <span className="text-gray-100 text-sm">
                                                 You
                                             </span>
-                                            <span className="text-white bg-gray-700 rounded-lg px-3 py-2 text-sm mt-2">
+                                            <span className="text-black bg-gray-300 rounded-lg px-3 py-2 text-sm mt-2">
                                                 {userMessage}
                                             </span>
                                         </div>
                                     )}
                                     {botResponse && (
                                         <div className="flex flex-col mb-4">
-                                            <span className="text-gray-400 text-sm">
+                                            <span className="text-gray-100 text-sm">
                                                 Eva
                                             </span>
-                                            <span className="text-white bg-gray-700 rounded-lg px-3 py-2 text-sm mt-2">
+                                            <span className="text-black bg-gray-300 rounded-lg px-3 py-2 text-sm mt-2">
                                                 {botResponse}
                                             </span>
                                         </div>
@@ -83,7 +83,7 @@ function Chatbot() {
                                 <div className="flex items-center px-4 py-2">
                                     <input
                                         type="text"
-                                        className="bg-gray-700 rounded-full w-full px-4 py-2 text-white"
+                                        className="bg-gray-500 rounded-full w-full px-4 py-2 text-white"
                                         placeholder="Type a message..."
                                         value={userInput}
                                         onChange={(e) =>
@@ -93,7 +93,7 @@ function Chatbot() {
                                     />
                                     <button
                                         onClick={getBotResponse}
-                                        className="flex items-center justify-center bg-gray-700 rounded-md w-12 h-10 ml-4"
+                                        className="flex items-center justify-center bg-gray-500 rounded-md w-12 h-10 ml-4"
                                     >   
                                         <p>🚀</p>
                                     </button>

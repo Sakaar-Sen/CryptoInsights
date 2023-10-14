@@ -87,9 +87,8 @@ const Navbar = ({pos}) => {
               <Link href='/learn'>Learn</Link>
             </li>
             <li onClick={handleNav} className='p-4 text-4xl hover:text-gray-500'>
-              <Link href='/learn'>News</Link>
+              <Link href='/news'>News</Link>
             </li>
-          
           </ul>
         </div>
       </div>

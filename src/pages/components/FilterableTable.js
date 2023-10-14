@@ -62,13 +62,14 @@ const FilterableTable = () => {
 
   return (
     <div className="filterable-table grid place-items-center h-max justify-center">
-      <input
-        type="text"
-        className="filter-input m-10 rounded-xl p-1 w-100 h-30 text-3xl "
-        placeholder="   Filter by any column"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
+        {/* <input
+          type="text"
+          className="filter-input m-10 rounded-xl p-1 w-100 h-30 text-3xl "
+          placeholder="   Filter by any column"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        /> */}
+        <h1 className="text-6xl m-8"> Analytics</h1>
       <table className="table m-2">
         <thead className="m-5">
           <tr>

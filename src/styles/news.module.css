@@ -9,6 +9,6 @@
  */
 
  .container{
-    background-image: linear-gradient(to left bottom, #005977, #004e73, #00446e, #003868, #002d60, #002756, #00214d, #001b44, #001838, #03142c, #030f20, #000815);
+    /* background-image: linear-gradient(to left bottom, #005977, #004e73, #00446e, #003868, #002d60, #002756, #00214d, #001b44, #001838, #03142c, #030f20, #000815); */
     min-height: 100vh;
  }

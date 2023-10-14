@@ -75,7 +75,7 @@ const FilterableTable = () => {
             {tableHeaders.map((header, index) => (
               <th
                 key={index}
-                className="table-header text-5xl p-12 border-b-2 m-5 w-100 sm:p-5 sm:text-2xl"
+                className="table-header text-5xl p-2 m-2 border-b-2 w-100 sm:text-[1.1rem]"
               >
                 <button
                   className="sort-button"
@@ -95,7 +95,7 @@ const FilterableTable = () => {
               {tableHeaders.map((header, index) => (
                 <td
                   key={index}
-                  className="table-cell m-6 mr p-6 border-b-2 text-3xl sm:p-5 sm:text-2xl"
+                  className="table-cell border-b-2 text-1xl sm:p-5 sm:text-[1rem]"
                 >
                   {item[header]}
                 </td>

@@ -173,13 +173,16 @@ async def getanalyticsdata(limit : int = 100):
     df = df[~df['index'].str.contains("BUSD")]
     df['index'] = df['index'].str.replace("-binanceusdm", "")
 
-    columnsToKeep = ["index", "price", "marketcap", "OI/MC", "volatility_15m", "volatility_1h", "BTC_correlation_3d", "ETH_correlation_3d", "BTC_beta_3d", "ETH_beta_3d"]
+    columnsToKeep = ["index", "price", "OI/MC", "volatility_15m", "volatility_1h", "BTC_correlation_3d", "ETH_correlation_3d", "BTC_beta_3d", "ETH_beta_3d"]
     df = df[columnsToKeep]
-    
+    # df["id"] = df["index"]
+
+
     df = df[:limit]
     df = df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
     df = df.to_dict(orient='records')
-    return {"data": df}
+    print(type(df))
+    return df
 
 
 

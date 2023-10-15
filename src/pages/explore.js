@@ -1,14 +1,15 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Navbar from './components/Navbar'
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import Navbar from "./components/Navbar";
+const inter = Inter({ subsets: ["latin"] });
+// import styles from "./../styles/explore.module.css";
+import ExploreElement from "./components/ExploreElement";
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Explpore() {
+export default function Explore() {
   return (
-    <div>
+    <div className="bg-black">
       <Navbar />
+      <ExploreElement />
     </div>
-   
-  )
+  );
 }

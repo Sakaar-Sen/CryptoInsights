@@ -12,7 +12,7 @@ const ExploreElement = () => {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div className="mt-12 grid grid-cols-1  md:grid-cols-3 gap-4 place-items-center  ">
@@ -26,15 +26,23 @@ const ExploreElement = () => {
                 <div className="mt-2">
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1d </p>
-                    <p className=" text-slate-500">{list.change_1h}</p>
+                    <p className=" text-slate-500">{list["Change 1h"]}</p>
                   </div>
                   <div className="flex">
-                    <p className="mr-16 text-slate-500">24h Low </p>
-                    <p className=" text-slate-500">{list.change_1h} </p>
+                    <p className="mr-16 text-slate-500">Change 1d </p>
+                    <p className=" text-slate-500">{list["Change 1d"]} </p>
+                  </div>
+                  <div className="flex">
+                    <p className="mr-16 text-slate-500">Change 1h </p>
+                    <p className=" text-slate-500">{list["Change 1h"]} </p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Volume </p>
-                    <p className=" text-slate-500">{list.volume_1d} </p>
+                    <p className=" text-slate-500">{list["Volume 1d"]} </p>
+                  </div>
+                  <div className="flex">
+                    <p className="mr-16 text-slate-500">Market Cap </p>
+                    <p className=" text-slate-500">{list["Market Cap"]} </p>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,7 @@ const ExploreElement = () => {
   let [data, setdata] = useState([]);
   useEffect(() => {
     axios
-      .get("http://sakaarsen.lag.tf/api/explore")
+      .get("/api/explore")
       .then((res) => {
         setdata(res.data);
       })
@@ -26,11 +26,11 @@ const ExploreElement = () => {
                 <div className="mt-2">
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1d </p>
-                    <p className=" text-slate-500">{list["Change 1h"]}</p>
+                    <p className=" text-slate-500">{list["Change 1h"]} %</p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1d </p>
-                    <p className=" text-slate-500">{list["Change 1d"]} </p>
+                    <p className=" text-slate-500">{list["Change 1d"]} %</p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1h </p>

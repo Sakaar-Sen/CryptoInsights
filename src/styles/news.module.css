@@ -1,13 +1,19 @@
 
 .container{
     background-image: url("../../public/q5.jpg");
-    background-repeat: repeat;
-    background-size: 100%;
-    min-height:100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     background-color: #00000078;
     background-blend-mode: multiply;
 }
 
+/* backgroundImage: "url(./../../q7.jpg)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed" */
 
  /* .container{
     background-image: linear-gradient(to left bottom, #005977, #004e73, #00446e, #003868, #002d60, #002756, #00214d, #001b44, #001838, #03142c, #030f20, #000815);

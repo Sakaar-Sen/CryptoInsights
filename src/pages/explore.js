@@ -18,7 +18,7 @@ export default function Explore() {
       }}
     >
       <Navbar />
-      <div className="z-0">
+      <div className="p-12">
         <div className="flex justify-center items-center">
           <h1 className="text-5xl text-gray-100 font-bold mt-12 mb-4 tracking-wide">
             Explore

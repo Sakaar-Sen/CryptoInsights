@@ -26,23 +26,23 @@ const ExploreElement = () => {
                 <div className="mt-2">
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1d </p>
-                    <p className=" text-slate-500">{list["Change 1h"]} %</p>
+                    <p className=" text-slate-400">{list["Change 1h"]} %</p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500 z-0">Change 1d </p>
-                    <p className=" text-slate-500">{list["Change 1d"]} %</p>
+                    <p className=" text-slate-400">{list["Change 1d"]} %</p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Change 1h </p>
-                    <p className=" text-slate-500">{list["Change 1h"]} </p>
+                    <p className=" text-slate-400">{list["Change 1h"]} </p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Volume </p>
-                    <p className=" text-slate-500">{list["Volume 1d"]} </p>
+                    <p className=" text-slate-400">{list["Volume 1d"]} </p>
                   </div>
                   <div className="flex">
                     <p className="mr-16 text-slate-500">Market Cap </p>
-                    <p className=" text-slate-500">{list["Market Cap"]} </p>
+                    <p className=" text-slate-400">{list["Market Cap"]} </p>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-const Navbar = ({ pos }) => {
+const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [color, setColor] = useState("transparent");
   const [textColor, setTextColor] = useState("white");
@@ -31,8 +31,7 @@ const Navbar = ({ pos }) => {
     <div
       className={
         "left-0 top-0 w-full z-10 ease-in duration-30 bg-gray-900 bg-opacity-50 backdrop-blur-sm" +
-        " " +
-        pos
+        " fixed "
       }
     >
       <div className="max-w-[1240px] m-auto flex justify-between items-center py-2 px-4  text-white">

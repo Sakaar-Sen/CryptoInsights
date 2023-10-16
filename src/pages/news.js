@@ -1,12 +1,12 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Navbar from './components/Navbar'
-import NewsElement from './components/NewsElement'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import axios from 'axios'
-import styles from './../styles/news.module.css'
-import Chatbot from './components/ChatBot'
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import Navbar from "./components/Navbar";
+import NewsElement from "./components/NewsElement";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import styles from "./../styles/news.module.css";
+import Chatbot from "./components/ChatBot";
 
 export default function News() {
   const [news, setNews] = useState([]);
@@ -39,13 +39,16 @@ export default function News() {
     <div className={styles.container}>
       <Navbar />
       <Chatbot />
-      
 
-      <div className="flex justify-center items-center">
-        <h1 className="text-5xl text-gray-100 font-bold mt-12 mb-4 tracking-wide">News</h1>
+      <div className="flex justify-center items-center pt-16">
+        <h1 className="text-5xl text-gray-100 font-bold mt-12 mb-4 tracking-wide">
+          News
+        </h1>
       </div>
       <div className="flex justify-center items-center">
-        <p className="text-gray-300 text-xl mb-8">The latest news from the crypto world</p>
+        <p className="text-gray-300 text-xl mb-8">
+          The latest news from the crypto world
+        </p>
       </div>
 
       {news.length == 0 ? (
@@ -68,22 +71,32 @@ export default function News() {
               />
             ))}
         </div>
-
-
       </div>
       {news.length === 0 ? (
-        <div>
-        </div>)
-        :
+        <div></div>
+      ) : (
         <div className="flex justify-center items-center mt-6 pb-20">
-          <div className='flex gap-24 justify-center items-center'>
-            <button className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage - 1)}>Previous </button>
-            <span className='text-white text-[1.2rem]'> {currentPage} of {totalPages} </span>
-            <button className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-4 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250" onClick={() => handlePageChange(currentPage + 1)}> Next</button>
+          <div className="flex gap-24 justify-center items-center">
+            <button
+              className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250"
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Previous{" "}
+            </button>
+            <span className="text-white text-[1.2rem]">
+              {" "}
+              {currentPage} of {totalPages}{" "}
+            </span>
+            <button
+              className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-4 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              {" "}
+              Next
+            </button>
           </div>
-        </div>}
-
-
+        </div>
+      )}
     </div>
   );
 }

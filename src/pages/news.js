@@ -78,7 +78,7 @@ export default function News() {
         <div className="flex justify-center items-center mt-6 pb-20">
           <div className="flex gap-24 justify-center items-center">
             <button
-              className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250"
+              className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg backdrop-blur hover:bg-gray-800 transition-all duration-250"
               onClick={() => handlePageChange(currentPage - 1)}
             >
               Previous{" "}
@@ -88,7 +88,7 @@ export default function News() {
               {currentPage} of {totalPages}{" "}
             </span>
             <button
-              className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-4 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 transition-all duration-250"
+              className="text-gray-100 text-[1.2rem] border-gray-300 backdrop-blur border-solid border-2 px-4 py-1 rounded-lg  hover:bg-gray-800 transition-all duration-250"
               onClick={() => handlePageChange(currentPage + 1)}
             >
               {" "}

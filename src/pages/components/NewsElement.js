@@ -10,7 +10,7 @@ function NewsElement(props) {
       target="_blank"
       className="md:w-[48rem] hover:scale-105 transition duration-100 relative"
     >
-      <div className="text-white relative z-0 flex items-center justify-start bg-slate-800 border-slate-400 border-solid border-2 rounded-lg gap-8">
+      <div className="text-white backdrop-blur relative z-0 flex items-center justify-start border-slate-400 border-solid border-2 rounded-lg gap-8">
         <div>
           <Image
             alt={props.coin}

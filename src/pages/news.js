@@ -76,7 +76,7 @@ export default function News() {
         <div></div>
       ) : (
         <div className="flex justify-center items-center mt-6 pb-20">
-          <div className="flex gap-24 justify-center items-center">
+          <div className="flex  gap-8 md:gap-24 justify-center items-center">
             <button
               className="text-gray-100 text-[1.2rem] border-gray-300 border-solid border-2 px-2 py-1 rounded-lg backdrop-blur hover:bg-gray-800 transition-all duration-250"
               onClick={() => handlePageChange(currentPage - 1)}

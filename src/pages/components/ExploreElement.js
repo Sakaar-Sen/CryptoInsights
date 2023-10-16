@@ -15,12 +15,12 @@ const ExploreElement = () => {
   }, []);
 
   return (
-    <div className="mt-12 grid grid-cols-1  md:grid-cols-3 gap-4 place-items-center  ">
+    <div className="z-0 mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 place-items-center  ">
       {data.map((list, i) => {
         return (
           <div key={i}>
-            <div className="h-52 w-64   backdrop-blur font-bold border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]  mb-12">
-              <div className="p-4 text-white">
+            <div className="h-52 w-64 backdrop-blur font-bold border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] mb-12 z-0 relative">
+              <div className="p-4 text-white z-0">
                 <p>{list.index}</p>
                 <p>{list.price}</p>
                 <div className="mt-2">
@@ -29,7 +29,7 @@ const ExploreElement = () => {
                     <p className=" text-slate-500">{list["Change 1h"]} %</p>
                   </div>
                   <div className="flex">
-                    <p className="mr-16 text-slate-500">Change 1d </p>
+                    <p className="mr-16 text-slate-500 z-0">Change 1d </p>
                     <p className=" text-slate-500">{list["Change 1d"]} %</p>
                   </div>
                   <div className="flex">

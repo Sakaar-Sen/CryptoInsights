@@ -16,7 +16,13 @@ const ExploreElement = () => {
 
   return (
     <div className="z-0 mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 place-items-center  ">
-      {data.map((list, i) => {
+      {data && data.length === 0 && (
+        <div className="flex justify-center items-center mt-3 col-span-3">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-gray-200">
+          </div>
+        </div>
+      )}
+      {data && data.map((list, i) => {
         return (
           <div key={i}>
             <div className="h-52 w-64 backdrop-blur font-bold border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f] mb-12 z-0 relative">

@@ -53,7 +53,7 @@ export default function News() {
 
       {news.length == 0 ? (
         <div className="flex justify-center items-center mt-20">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-gray-400"></div>
         </div>
       ) : null}
 

@@ -8,7 +8,7 @@ import ExploreElement from "./components/ExploreElement";
 export default function Explore() {
   return (
     <div
-      className="bg-black"
+      className="min-h-[100vh]"
       style={{
         backgroundImage: "url(./../../q7.jpg)",
         backgroundRepeat: "no-repeat",

@@ -20,12 +20,16 @@ export default function Explore() {
       <Navbar />
       <div className="p-12">
         <div className="flex justify-center items-center">
-          <h1 className="text-5xl text-gray-100 text-center font-bold mt-12 mb-4 tracking-wide">
+          <h1 className="text-5xl text-gray-100 text-center font-bold mt-12 mb-4 tracking-wide" style={{
+            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+          }}>
             Explore
           </h1>
         </div>
         <div className="flex justify-center items-center">
-          <p className="text-gray-300 text-center text-l md:text-xl mb-8">
+          <p className="text-gray-300 text-center text-l md:text-xl mb-8"  style={{
+            textShadow: "2px 2px 4px rgba(0,0,0,0.3)"
+            }}>
             The most popular cryptocurrencies at your fingertips!
           </p>
         </div>

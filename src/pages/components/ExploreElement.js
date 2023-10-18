@@ -23,26 +23,18 @@ const ExploreElement = () => {
               <div className="p-4 text-white z-0">
                 <p>{list.index}</p>
                 <p>{list.price}</p>
-                <div className="mt-2">
-                  <div className="flex">
-                    <p className="mr-16 text-slate-400">Change 1d </p>
-                    <p className=" text-slate-400">{list["Change 1h"]} %</p>
+                <div className=" mt-2 flex">
+                  <div className="mr-8   flex-column">
+                    <p className=" text-slate-300">Change 1d </p>
+                    <p className=" text-slate-300">Change 1h</p>
+                    <p className=" text-slate-300">Volume</p>
+                    <p className=" text-slate-300">Market Cap</p>
                   </div>
-                  <div className="flex">
-                    <p className="mr-16 text-slate-400 z-0">Change 1d </p>
-                    <p className=" text-slate-400">{list["Change 1d"]} %</p>
-                  </div>
-                  <div className="flex">
-                    <p className="mr-16 text-slate-400">Change 1h </p>
-                    <p className=" text-slate-400">{list["Change 1h"]} </p>
-                  </div>
-                  <div className="flex">
-                    <p className="mr-16 text-slate-400">Volume </p>
-                    <p className=" text-slate-400">{list["Volume 1d"]} </p>
-                  </div>
-                  <div className="flex">
-                    <p className="mr-16 text-slate-400">Market Cap </p>
-                    <p className=" text-slate-400">{list["Market Cap"]} </p>
+                  <div className="flex-column">
+                    <p className=" text-slate-300">{list["Change 1d"]}</p>
+                    <p className=" text-slate-300">{list["Change 1h"]} </p>
+                    <p className=" text-slate-300">{list["Volume 1d"]} </p>
+                    <p className=" text-slate-300">{list["Market Cap"]} </p>
                   </div>
                 </div>
               </div>

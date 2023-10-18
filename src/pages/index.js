@@ -14,12 +14,14 @@ export default function Home() {
             <p
               className="text-white text-5xl md:text-8xl font-bold tracking-[.3rem]"
               style={{
-                textShadow: "0px 4px 4px rgba(0, 0, 0, 0.7)",
+                textShadow: "0px 4px 4px rgba(0, 0, 0, 0.3)",
               }}
             >
               Crypto Insights
             </p>
-            <p className="text-[1.2rem] md:text-[1.2rem] mt-6 mb-6 tracking-[.1rem]">
+            <p className="text-[1.2rem] md:text-[1.2rem] mt-6 mb-6 tracking-[.1rem]" style={{
+                textShadow: "0px 4px 4px rgba(0, 0, 0, 0.2)",
+              }}>
               Tracking over <span className="font-semibold">100+</span>{" "}
               cryptocurrencies using <span className="font-semibold">15+</span>{" "}
               unique metrics

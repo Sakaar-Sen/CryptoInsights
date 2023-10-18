@@ -35,7 +35,7 @@ const ExploreElement = () => {
                     <p className=" text-slate-300">Change 1h</p>
                     <p className=" text-slate-300">Volume</p>
                     <p className=" text-slate-300">Market Cap</p>
-                  </div>
+                  </div>  
                   <div className="flex-column">
                     <p className=" text-slate-300">{list["Change 1d"]}</p>
                     <p className=" text-slate-300">{list["Change 1h"]} </p>

@@ -41,12 +41,17 @@ export default function News() {
       <Chatbot />
 
       <div className="flex justify-center items-center pt-16">
-        <h1 className="text-5xl text-gray-100 font-bold mt-12 mb-4 tracking-wide">
+        <h1 className="text-5xl text-gray-100 font-bold mt-12 mb-4 tracking-wide" 
+         style={{
+          textShadow: "2px 2px 4px rgba(0,0,0,0.5)"
+          }}>
           News
         </h1>
       </div>
       <div className="flex justify-center items-center">
-        <p className="text-gray-300 text-xl mb-8">
+        <p className="text-gray-300 text-xl mb-8"  style={{
+            textShadow: "2px 2px 4px rgba(0,0,0,0.5)"
+            }}>
           The latest news from the crypto world
         </p>
       </div>

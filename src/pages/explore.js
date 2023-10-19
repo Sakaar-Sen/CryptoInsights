@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 import styles from "./../styles/Explore.module.css";
 import ExploreElement from "./components/ExploreElement";
+import Chatbot from "./components/ChatBot";
 
 export default function Explore() {
   return (
@@ -34,6 +35,7 @@ export default function Explore() {
           </p>
         </div>
         <ExploreElement />
+        <Chatbot />
       </div>
     </div>
   );

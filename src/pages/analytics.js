@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Navbar from './components/Navbar'
 import FilterableTable from './components/FilterableTable'
+import Chatbot from './components/ChatBot'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,6 +37,7 @@ export default function Analytics() {
       <div className='container m-5 text-[#f8fafc] mb-24'>
         <FilterableTable />
       </div>
+      <Chatbot />
     </div>
 
   )

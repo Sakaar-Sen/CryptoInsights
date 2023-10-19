@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import Image from "next/image";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -27,6 +28,7 @@ const Navbar = () => {
   //   window.addEventListener('scroll', changeColor);
   // }, []);
 
+
   return (
     <div
       className={
@@ -39,6 +41,8 @@ const Navbar = () => {
           <h1 style={{ color: `${textColor}` }} className="font-bold text-2xl ">
             Crypto Insights
           </h1>
+
+          {/* <Image src="/logo3.png" width={50} height={50} className=""/> */}
         </Link>
         <ul
           style={{ color: `${textColor}` }}
@@ -62,11 +66,7 @@ const Navbar = () => {
               Analytics
             </Link>
           </li>
-          <li className="py-2 px-4 ">
-            <Link href="/learn" className="hover:text-gray-300 duration-150">
-              Learn
-            </Link>
-          </li>
+        
           <li className="py-2 px-4 ">
             <Link href="/news" className="hover:text-gray-300 duration-150">
               News
@@ -109,12 +109,7 @@ const Navbar = () => {
             >
               <Link href="/analytics">Analytics</Link>
             </li>
-            <li
-              onClick={handleNav}
-              className="p-4 text-4xl hover:text-gray-500"
-            >
-              <Link href="/learn">Learn</Link>
-            </li>
+        
             <li
               onClick={handleNav}
               className="p-4 text-4xl hover:text-gray-500"
